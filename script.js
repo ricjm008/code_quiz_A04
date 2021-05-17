@@ -128,27 +128,27 @@ const startGame= function () {
             }, 1000);
           }
         setTime()
-        newQuestions[i].answers = newQuestions[i].falseChoices + newQuestions[i].trueChoice;
         function getAnswers(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [array[i], array[j]] = [array[j], array[i]];
+                return array
             }
-        newQuestions[i].answers = getAnswers(newQuestions[i].answers);
+        getAnswers(newQuestions[i].choices);
         currentQuestion = `
         <h3>${newQuestions[i].name}</h3>
         <ul>
             <li>
-                <button class="gameButtons">${newQuestions[i].answers[0]}</button>
+                <button class="gameButtons">${newQuestions[i].choices[0]}</button>
             </li>
             <li>
-                <button class="gameButtons">${newQuestions[i].answers[1]}</button>
+                <button class="gameButtons">${newQuestions[i].choices[1]}</button>
             </li>
             <li>
-                <button class="gameButtons">${newQuestions[i].answers[2]}</button>
+                <button class="gameButtons">${newQuestions[i].choices[2]}</button>
             </li>
             <li>
-                <button class="gameButtons">${newQuestions[i].answers[3]}</button>
+                <button class="gameButtons">${newQuestions[i].choices[3]}</button>
             </li>
         </ul>
         `
@@ -186,26 +186,27 @@ const startGame= function () {
         }
         const answer = "";
         i++;
-        $(".gameButtons").addEventListener("click", function(){answer= $(".gameButtons").html()});
-        if (answer == newQuestions[i-1].trueChoice) {
-            correctAnswer()
-        } else if (answer == newQuestions[i-1].falseChoices) {
-            incorrectAnswer()
-        }
-        if (i < questions.length && timer > 0) {
-            playGame()
-        } else if (i >= questions.length) {
-            results()
-        } else if (timer <= 0) {
-            timesUp()
-            results()
-        }
+        // $(".gameButtons").addEventListener("click", function(){answer= $(".gameButtons").html()});
+        // if (answer == newQuestions[i-1].trueChoice) {
+        //     correctAnswer()
+        // } else if (answer == newQuestions[i-1].falseChoices) {
+        //     incorrectAnswer()
+        // }
+        // if (i < questions.length && timer > 0) {
+        //     playGame()
+        // } else if (i >= questions.length) {
+        //     results()
+        // } else if (timer <= 0) {
+        //     timesUp()
+        //     results()
+        // }
         
         
     }
     $(".gameButtons").addEventListener("click", playGame);
-    playGame();
-    
 }
+playGame();
+    
+
 }
 $(".startGame").click(startGame);

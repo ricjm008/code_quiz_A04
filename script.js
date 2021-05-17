@@ -1,6 +1,6 @@
 let leaderboard = [];
-const questions = {
-    question1: {
+const questions = [
+    {
         name: "What does HTML stand for?",
         choices: [
             ["Hypertext Markup Language", true],
@@ -9,7 +9,7 @@ const questions = {
             ["Hexagon Type Microlaser", false]
         ]
     },
-    question2: {
+    {
         name: "What does CSS stand for?",
         choices: [
             ["Cascading Style Sheets", true],
@@ -18,7 +18,7 @@ const questions = {
             ["Careful Siren Sounding", false]
         ]
     },
-    question3: {
+    {
         name: "What does JS stand for?",
         choices: [
             ["Javascript", true],
@@ -27,7 +27,7 @@ const questions = {
             ["Joyful Silence", false]
         ]
     },
-    question4: {
+    {
         name: "What is the name of the abbreviation system used for writing HTML and other languages?",
         choices: [
             ["Emmet abbreviation", true],
@@ -36,7 +36,7 @@ const questions = {
             ["Eton abbreviation", false]
         ]
     },  
-    question5: {
+    {
         name: "What are the six primitive data types in JS?",
         choices: [
             ["Number, String, Boolean, Null, Undefined, Symbol", true],
@@ -45,7 +45,7 @@ const questions = {
             ["Adverb, Noun, Adjective, Conjunction, Verb, Sentence", false]
         ]
     },
-    question6: {
+    {
         name: "What is the primary scripting language of the internet?",
         choices: [
             ["Javascript", true],
@@ -54,7 +54,7 @@ const questions = {
             ["Python", false]
         ]
     },
-    question7: {
+    {
         name: "When was HTML invented?",
         choices: [
             ["1993", true],
@@ -63,7 +63,7 @@ const questions = {
             ["2011", false]
         ]
     },
-    question8: {
+    {
         name: "What is the most popular web browser for desktops?",
         choices: [
             ["Google Chrome", true],
@@ -72,7 +72,7 @@ const questions = {
             ["Mozilla Firefox", false]
         ]
     },
-    question9: {
+    {
         name: "What is the most trafficked website on the internet?",
         choices: [
             ["Google.com", true],
@@ -81,7 +81,7 @@ const questions = {
             ["Wikipedia.org", false]
         ]
     },
-    question10: {
+    {
         name: "How much information is on the internet?",
         choices: [
             ["50 trillion gigabytes", true],
@@ -90,7 +90,7 @@ const questions = {
             ["1 trillion gigabytes", false]
         ]
     },
-}
+];
 const newScore = {
     name: "",
     score: 0
@@ -137,20 +137,27 @@ const startGame= function () {
         getAnswers(newQuestions[i].choices);
         currentQuestion = `
         <h3>${newQuestions[i].name}</h3>
-        <ul>
-            <li>
-                <button class="gameButtons">${newQuestions[i].choices[0]}</button>
-            </li>
-            <li>
-                <button class="gameButtons">${newQuestions[i].choices[1]}</button>
-            </li>
-            <li>
-                <button class="gameButtons">${newQuestions[i].choices[2]}</button>
-            </li>
-            <li>
-                <button class="gameButtons">${newQuestions[i].choices[3]}</button>
-            </li>
-        </ul>
+        <div class="-m-2 text-center">
+        <div class="p-2">
+            <div class="inline-flex items-center bg-white leading-none text-pink-600 rounded-full p-2 shadow text-teal text-sm">
+            <span class="inline-flex px-2">${newQuestions[i]}</span>
+            </div>
+        </div>
+        
+        <div class="p-2">
+            <div class="inline-flex items-center bg-white leading-none text-purple-600 rounded-full p-2 shadow text-sm">
+            <span class="inline-flex bg-purple-600 text-white rounded-full h-6 px-3 justify-center items-center text-">Purple</span>
+            <span class="inline-flex px-2">Aliquam condimentum, odio finibus fermentum neque risus.</span>
+            </div>
+        </div>
+        
+        <div class="p-2">
+            <div class="inline-flex items-center bg-white leading-none text-purple-600 rounded-full p-2 shadow text-teal text-sm">
+            <span class="inline-flex bg-indigo-600 text-white rounded-full h-6 px-3 justify-center items-center">Indigo</span>
+            <span class="inline-flex px-2">Praesent ex nibh, laoreet id luctus vitae, porttitor at turpis. </span>
+            </div>
+        </div>
+        </div>
         `
         $playGame.children.remove();
         $playGame.append(currentQuestion);

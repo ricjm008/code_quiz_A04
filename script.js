@@ -1,62 +1,62 @@
 let leaderboard = [];
-const questions = [
-    question1= {
-        name: "Whats coding?",
-        falseChoices: ["boring", "silly", "useless"],
-        trueChoice: "fun"
+const questions = {
+    question1: {
+        name: "",
+        falseChoices: [],
+        trueChoice: ""
     },
-    question2= {
-        name: "Is coding hard?",
-        falseChoices: ["Yeah, real tricky", "Can't wrap my head around it", "Near impossible"],
-        trueChoice: "Nah, it's a breeze"
+    question2: {
+        name: "",
+        falseChoices: [],
+        trueChoice: ""
     },
-    question3= {
-        name: "What's my middle name?",
-        falseChoices: ["safety", "non-hazard", "stable"],
-        trueChoice: "danger"
+    question3: {
+        name: "",
+        falseChoices: [],
+        trueChoice: ""
     },
-    question4= {
-        name: "What's 2 + 2?",
-        falseChoices: ["5", "6", "3"],
-        trueChoice: "4"
+    question4: {
+        name: "",
+        falseChoices: [],
+        trueChoice: ""
     },  
-    question5= {
-        name: "Why is the sky blue?",
-        falseChoices: ["God's will", "Inexpicable", "Jet fuel"],
-        trueChoice: "Blue tinted sunglasses on planet earth"
+    question5: {
+        name: "",
+        falseChoices: [],
+        trueChoice: ""
     },
-    question6= {
-        name: "Who are you?",
-        falseChoices: ["I don't know", "Who's asking", "Mind your own business"],
-        trueChoice: "I am me"
+    question6: {
+        name: "",
+        falseChoices: [],
+        trueChoice: ""
     },
-    question7= {
-        name: "Help me, Lord",
-        falseChoices: ["Stay calm and carry on", "Help yourself", "God cannot hear you"],
-        trueChoice: "Rise and shake off your shackles"
+    question7: {
+        name: "",
+        falseChoices: [],
+        trueChoice: ""
     },
-    question8= {
-        name: "What is javascript?",
-        falseChoices: ["An Indonesian alphabet", "A cup of coffee", "An enlightened philosophy"],
-        trueChoice: "A programming language"
+    question8: {
+        name: "",
+        falseChoices: [],
+        trueChoice: ""
     },
-    question9= {
-        name: "Why learn coding?",
-        falseChoices: ["the internet", "problem-solving", "changing economic relations"],
-        trueChoice: "mining crypto"
+    question9: {
+        name: "",
+        falseChoices: [],
+        trueChoice: ""
     },
-    question10= {
-        name: "Will Vladimir Lenin rise again and lead glorious revolution?",
-        falseChoices: ["No, necromancy is impossible", "Communism has fallen in Russia", "The revolution was betrayed"],
-        trueChoice: "Glory to the immortal science of Marxism"
+    question10: {
+        name: "",
+        falseChoices: [],
+        trueChoice: ""
     },
-]
+}
 const newScore = {
     name: "",
     score: 0
 }
-const $playGame = $("#playGame");
-const $timer = $("#timer");
+const $playGame = document.getElementById("playGame")
+const $timer = document.getElementById("timer")
 const startGame= function () {
     let score = 0;
     function getQuestions(array) {
@@ -66,7 +66,7 @@ const startGame= function () {
             return array
         }
     };     
-    getQuestions(questions);
+    let newQuestions = getQuestions(questions);
     let  i= 0;
     
     function playGame() {
@@ -76,63 +76,59 @@ const startGame= function () {
             // Sets interval in variable
             var timerInterval = setInterval(function() {
               secondsLeft--;
-              $timer.empty();
-              $timer.append(`<p id="timer">${secondsLeft}</p>`)
+              timeEl.textContent = secondsLeft + " seconds left till colorsplosion.";
+          
               if(secondsLeft === 0) {
                 // Stops execution of action at set interval
                 clearInterval(timerInterval);
                 // Calls function to create and append image
                 timesUp();
-                return;
               }
-              
+          
             }, 1000);
-            console.log("set timer");
-            
           }
-        function asdf() {
-            
-        currentQuestion = `
-        <div id="playGame">
-            <h3>${questions[9].name}</h3>
-            <ul>
-                <li>
-                    <button class="gameButtons">${questions[9].falseChoices[0]}</button>
-                </li>
-                <li>
-                    <button class="gameButtons">${questions[9].falseChoices[1]}</button>
-                </li>
-                <li>
-                    <button class="gameButtons">${questions[9].falseChoices[2]}</button>
-                </li>
-                <li>
-                    <button class="gameButtons">${questions[9].trueChoice}</button>
-                </li>
-            </ul>
-        </div>
-        `
-        $playGame.empty();
-        $playGame.append(currentQuestion);
-        console.log("let's play");
-        }
-        asdf();
         setTime()
+        newQuestions[i].answers = newQuestions[i].falseChoices + newQuestions[i].trueChoice;
+        function getAnswers(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        newQuestions[i].answers = getAnswers(newQuestions[i].answers);
+        currentQuestion = `
+        <h3>${newQuestions[i].name}</h3>
+        <ul>
+            <li>
+                <button class="gameButtons">${newQuestions[i].answers[0]}</button>
+            </li>
+            <li>
+                <button class="gameButtons">${newQuestions[i].answers[1]}</button>
+            </li>
+            <li>
+                <button class="gameButtons">${newQuestions[i].answers[2]}</button>
+            </li>
+            <li>
+                <button class="gameButtons">${newQuestions[i].answers[3]}</button>
+            </li>
+        </ul>
+        `
+        $playGame.children.remove();
+        $playGame.append(currentQuestion);
         function correctAnswer() {
             score = score + 5;
-            $playGame.empty();
+            $playGame.children.remove();
             $playGame.append(`<h3>Correct!</h3>`)
         }
         function incorrectAnswer() {
             timer = timer - 5;
-            $playGame.empty();
+            $playGame.children.remove();
             $playGame.append(`<h3>Incorrect!</h3>`)
         }
         function timesUp() {
-            $playGame.empty();
-            $playGame.append(`<h3>Time's Up!</h3>`)
+
         }
         function results() {
-            $playGame.empty();
+            $playGame.children.remove();
             let gameResults = `
             <h3>Results</h3>
             <p>Score: ${score}</p>
@@ -147,16 +143,7 @@ const startGame= function () {
                 score: score
             }
             localStorage.setItem("newScore", JSON.stringify(newScore))
-            console.log("play game");
         }
-        answers = questions[i].falseChoices + questions[i].trueChoice;
-        function getAnswers(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-        questions[i].answers = getAnswers(answers);
-        
         const answer = "";
         i++;
         $(".gameButtons").addEventListener("click", function(){answer= $(".gameButtons").html()});
@@ -165,23 +152,20 @@ const startGame= function () {
         } else if (answer == newQuestions[i-1].falseChoices) {
             incorrectAnswer()
         }
-        if (i < questions.length && secondsLeft > 0) {
+        if (i < questions.length && timer > 0) {
             playGame()
-            console.log("lets gooo");
         } else if (i >= questions.length) {
             results()
-            console.log("game over");
-        } else if (secondsLeft <= 0) {
+        } else if (timer <= 0) {
             timesUp()
             results()
         }
         
         
     }
-    $(".gameButtons").click(asdf);
-    
+    $(".gameButtons").addEventListener("click", playGame);
+    playGame();
     
 }
-playGame();
 }
 $(".startGame").click(startGame);

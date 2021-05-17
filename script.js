@@ -203,8 +203,9 @@ const startGame= function () {
         
         
     }
-    $(".gameButtons").addEventListener("click", playGame);
 }
+$(".gameButtons").addEventListener("click", playGame);
+
 playGame();
     
 

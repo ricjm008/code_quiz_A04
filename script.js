@@ -99,25 +99,23 @@ const $playGame = document.getElementById("playGame")
 const $timer = document.getElementById("timer")
 const startGame= function () {
     let score = 0;
-    function getQuestions(array) {
+    function scramble(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
             return array
         }
+        console.log("Questions scrambled");
+        return array;
     };     
-    let newQuestions = getQuestions(questions);
+    scramble(questions);
     let  i= 0;
-    
-    function playGame() {
-        let secondsLeft = 45;
-        
-        function setTime() {
+    function setTime() {
             // Sets interval in variable
             var timerInterval = setInterval(function() {
               secondsLeft--;
               timeEl.textContent = secondsLeft + " seconds left till colorsplosion.";
-          
+              console.log("Timer set");
               if(secondsLeft === 0) {
                 // Stops execution of action at set interval
                 clearInterval(timerInterval);
@@ -127,34 +125,34 @@ const startGame= function () {
           
             }, 1000);
           }
-        setTime()
-        function getAnswers(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-                return array
-            }
-        getAnswers(newQuestions[i].choices);
+    setTime()
+    let secondsLeft = 45;
+    function playQuestion() {
+        scramble(questions[i].choices);
         currentQuestion = `
         <h3>${newQuestions[i].name}</h3>
         <div class="-m-2 text-center">
         <div class="p-2">
-            <div class="inline-flex items-center bg-white leading-none text-pink-600 rounded-full p-2 shadow text-teal text-sm">
-            <span class="inline-flex px-2">${newQuestions[i]}</span>
-            </div>
-        </div>
-        
-        <div class="p-2">
-            <div class="inline-flex items-center bg-white leading-none text-purple-600 rounded-full p-2 shadow text-sm">
-            <span class="inline-flex bg-purple-600 text-white rounded-full h-6 px-3 justify-center items-center text-">Purple</span>
-            <span class="inline-flex px-2">Aliquam condimentum, odio finibus fermentum neque risus.</span>
+            <div class="inline-flex items-center bg-white leading-none text-purple-600 rounded-full p-2 shadow text-teal text-sm">
+            <span class="inline-flex px-2">${questions[i].choices[0]}</span>
             </div>
         </div>
         
         <div class="p-2">
             <div class="inline-flex items-center bg-white leading-none text-purple-600 rounded-full p-2 shadow text-teal text-sm">
-            <span class="inline-flex bg-indigo-600 text-white rounded-full h-6 px-3 justify-center items-center">Indigo</span>
-            <span class="inline-flex px-2">Praesent ex nibh, laoreet id luctus vitae, porttitor at turpis. </span>
+            <span class="inline-flex px-2">${questions[i.choices[1]]}</span>
+            </div>
+        </div>
+        
+        <div class="p-2">
+            <div class="inline-flex items-center bg-white leading-none text-purple-600 rounded-full p-2 shadow text-teal text-sm">
+            <span class="inline-flex px-2">${questions[i].choices[2]}</span>
+            </div>
+        </div>
+
+        <div class="p-2">
+            <div class="inline-flex items-center bg-white leading-none text-purple-600 rounded-full p-2 shadow text-teal text-sm">
+            <span class="inline-flex px-2">${questions[i].choices[3]}</span>
             </div>
         </div>
         </div>
@@ -210,11 +208,7 @@ const startGame= function () {
         
         
     }
-}
 $(".gameButtons").addEventListener("click", playGame);
-
-playGame();
-    
-
+playQuestion();
 }
 $(".startGame").click(startGame);

@@ -1,54 +1,94 @@
 let leaderboard = [];
 const questions = {
     question1: {
-        name: "",
-        falseChoices: [],
-        trueChoice: ""
+        name: "What does HTML stand for?",
+        choices: [
+            ["Hypertext Markup Language", true],
+            ["Hostile Tank Missile Launch", false],
+            ["Horizontally Trained Master League", false],
+            ["Hexagon Type Microlaser", false]
+        ]
     },
     question2: {
-        name: "",
-        falseChoices: [],
-        trueChoice: ""
+        name: "What does CSS stand for?",
+        choices: [
+            ["Cascading Style Sheets", true],
+            ["Cash Safe System", false],
+            ["Coordinated Search Software", false],
+            ["Careful Siren Sounding", false]
+        ]
     },
     question3: {
-        name: "",
-        falseChoices: [],
-        trueChoice: ""
+        name: "What does JS stand for?",
+        choices: [
+            ["Javascript", true],
+            ["Juvenile Screening", false],
+            ["Juxtaposed Senses", false],
+            ["Joyful Silence", false]
+        ]
     },
     question4: {
-        name: "",
-        falseChoices: [],
-        trueChoice: ""
+        name: "What is the name of the abbreviation system used for writing HTML and other languages?",
+        choices: [
+            ["Emmet abbreviation", true],
+            ["Einstein abbreviation", false],
+            ["Edison abbreviation", false],
+            ["Eton abbreviation", false]
+        ]
     },  
     question5: {
-        name: "",
-        falseChoices: [],
-        trueChoice: ""
+        name: "What are the six primitive data types in JS?",
+        choices: [
+            ["Number, String, Boolean, Null, Undefined, Symbol", true],
+            ["1, 2, 3, 4, 5, 6", false],
+            ["Integer, Decimal, Fraction, Square Root, Exponent, Irrational", false],
+            ["Adverb, Noun, Adjective, Conjunction, Verb, Sentence", false]
+        ]
     },
     question6: {
-        name: "",
-        falseChoices: [],
-        trueChoice: ""
+        name: "What is the primary scripting language of the internet?",
+        choices: [
+            ["Javascript", true],
+            ["PHP", false],
+            ["C++", false],
+            ["Python", false]
+        ]
     },
     question7: {
-        name: "",
-        falseChoices: [],
-        trueChoice: ""
+        name: "When was HTML invented?",
+        choices: [
+            ["1993", true],
+            ["1984", false],
+            ["2007", false],
+            ["2011", false]
+        ]
     },
     question8: {
-        name: "",
-        falseChoices: [],
-        trueChoice: ""
+        name: "What is the most popular web browser for desktops?",
+        choices: [
+            ["Google Chrome", true],
+            ["Apple Safari", false],
+            ["Microsoft Edge", false],
+            ["Mozilla Firefox", false]
+        ]
     },
     question9: {
-        name: "",
-        falseChoices: [],
-        trueChoice: ""
+        name: "What is the most trafficked website on the internet?",
+        choices: [
+            ["Google.com", true],
+            ["Facebook.com", false],
+            ["Youtube.com", false],
+            ["Wikipedia.org", false]
+        ]
     },
     question10: {
-        name: "",
-        falseChoices: [],
-        trueChoice: ""
+        name: "How much information is on the internet?",
+        choices: [
+            ["50 trillion gigabytes", true],
+            ["50 billion gigabytes", false],
+            ["100 billion gigabytes", false],
+            ["1 trillion gigabytes", false]
+        ]
     },
 }
 const newScore = {

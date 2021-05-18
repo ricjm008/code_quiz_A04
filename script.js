@@ -95,7 +95,7 @@ const newScore = {
     name: "",
     score: 0
 }
-const $playGame = document.getElementById("playGame")
+const $playQuestion = document.getElementById("playGame")
 const $timer = document.getElementById("timer")
 const startGame= function () {
     let score = 0;
@@ -130,7 +130,7 @@ const startGame= function () {
     function playQuestion() {
         scramble(questions[i].choices);
         currentQuestion = `
-        <h3>${newQuestions[i].name}</h3>
+        <h3>${questions[i].name}</h3>
         <div class="-m-2 text-center">
         <div class="p-2">
             <div class="inline-flex items-center bg-white leading-none text-purple-600 rounded-full p-2 shadow text-teal text-sm">
@@ -140,7 +140,7 @@ const startGame= function () {
         
         <div class="p-2">
             <div class="inline-flex items-center bg-white leading-none text-purple-600 rounded-full p-2 shadow text-teal text-sm">
-            <span class="inline-flex px-2">${questions[i.choices[1]]}</span>
+            <span class="inline-flex px-2">${questions[i].choices[1]}</span>
             </div>
         </div>
         
@@ -157,23 +157,25 @@ const startGame= function () {
         </div>
         </div>
         `
-        $playGame.children.remove();
-        $playGame.append(currentQuestion);
+        $playQuestion.children.remove();
+        $playQuestion.append(currentQuestion);
         function correctAnswer() {
             score = score + 5;
-            $playGame.children.remove();
-            $playGame.append(`<h3>Correct!</h3>`)
+            $playQuestion.children.remove();
+            $playQuestion.append(`<h3>Correct!</h3>`)
+            console.log("Correct Answer");
         }
         function incorrectAnswer() {
             timer = timer - 5;
-            $playGame.children.remove();
-            $playGame.append(`<h3>Incorrect!</h3>`)
+            $playQuestion.children.remove();
+            $playQuestion.append(`<h3>Incorrect!</h3>`)
+            console.log("Incorrect Answer");
         }
         function timesUp() {
 
         }
         function results() {
-            $playGame.children.remove();
+            $playQuestion.children.remove();
             let gameResults = `
             <h3>Results</h3>
             <p>Score: ${score}</p>
@@ -182,7 +184,7 @@ const startGame= function () {
                 <label for="newScore>Enter Name: </label>
                 <input type="text" id="newScoreName" name="newScore"/>
             </form>`
-            $playGame.append(gameResults);
+            $playQuestion.append(gameResults);
             newScore = {
                 name: newScoreName,
                 score: score
@@ -191,20 +193,21 @@ const startGame= function () {
         }
         const answer = "";
         i++;
-        // $(".gameButtons").addEventListener("click", function(){answer= $(".gameButtons").html()});
-        // if (answer == newQuestions[i-1].trueChoice) {
-        //     correctAnswer()
-        // } else if (answer == newQuestions[i-1].falseChoices) {
-        //     incorrectAnswer()
-        // }
-        // if (i < questions.length && timer > 0) {
-        //     playGame()
-        // } else if (i >= questions.length) {
-        //     results()
-        // } else if (timer <= 0) {
-        //     timesUp()
-        //     results()
-        // }
+        $(".gameButtons").addEventListener("click", function(){answer= $(".gameButtons").html()});
+        answer = questions[i-1].choices.find(answer);
+        if (answer[1] === true) {
+            correctAnswer()
+        } else if (answer == false) {
+            incorrectAnswer()
+        }
+        if (i < questions.length && timer > 0) {
+            playGame()
+        } else if (i >= questions.length) {
+            results()
+        } else if (timer <= 0) {
+            timesUp()
+            results()
+        }
         
         
     }
